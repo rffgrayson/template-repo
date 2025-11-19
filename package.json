@@ -1,0 +1,24 @@
+{
+  "name": "template-repo",
+  "version": "1.0.0",
+  "description": "template-repo for any development purpose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rffgrayson/template-repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rffgrayson/template-repo/issues"
+  },
+  "homepage": "https://github.com/rffgrayson/template-repo#readme",
+  "devDependencies": {
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
