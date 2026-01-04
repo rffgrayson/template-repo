@@ -10,23 +10,37 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        runtime: [node, bun]
+
     steps:
       - uses: actions/checkout@v3
 
       - name: Setup Node.js
+        if: matrix.runtime == 'node'
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Setup Bun
+        if: matrix.runtime == 'bun'
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies (npm)
+        if: matrix.runtime == 'node'
         run: npm ci
 
+      - name: Install dependencies (bun)
+        if: matrix.runtime == 'bun'
+        run: bun install
+
       - name: Run linter
-        run: npm run lint
+        run: ${{ matrix.runtime == 'node' && 'npm' || 'bun' }} run lint
 
       - name: Check formatting
-        run: npm run format:check
+        run: ${{ matrix.runtime == 'node' && 'npm' || 'bun' }} run format:check
 
       - name: Build
-        run: npm run build
+        run: ${{ matrix.runtime == 'node' && 'npm' || 'bun' }} run build
